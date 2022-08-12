@@ -1,0 +1,61 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User{
+  id          String @id @default(cuid())
+  email       String @unique
+  password    String
+  role        String //Admin, User
+  userProfile UserProfile?
+  userCourseTrack UserCourseTrack[]
+
+}
+
+model UserProfile{
+  id           String @id @default(cuid())
+  avatar       String
+  about        String
+  expectations String
+  linkedin     String
+  age          Int
+  joinDate     DateTime @default(now())
+  user         User @relation(fields: [userId], references: [id])
+  userId       String @unique
+}
+
+model UserCourseTrack{
+  id                  String @id @default(cuid())
+  numCoursesCompleted Int
+  status              String
+  user                User @relation(fields: [userId], references: [id])
+  userId              String
+  Course             Course[]
+}
+
+model Course{
+  id                  String @id @default(cuid())
+  title               String
+  description         String
+  UserCourseTrack     UserCourseTrack @relation(fields: [userCourseTrackId], references: [id])
+  userCourseTrackId   String
+  CourseContent       CourseContent[]
+}
+
+model CourseContent{
+  id                  String @id @default(cuid())
+  name                String
+  description         String
+  typeFile            String
+  file                String
+  Course              Course @relation(fields: [courseId], references: [id])
+  courseId            String
+}
