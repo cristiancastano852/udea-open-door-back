@@ -5,7 +5,22 @@
   "repository": "https://github.com/AlejandroCristM/open-door-back.git",
   "author": "Cristian Castaño <cristian.castano1@udea.edu.co>",
   "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
   "dependencies": {
+    "@prisma/client": "^4.2.1",
+    "cors": "^2.8.5",
     "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^28.1.7",
+    "jest": "^28.1.3",
+    "jest-mock-extended": "^2.0.7",
+    "nodemon": "^2.0.19",
+    "prisma": "^4.2.1",
+    "ts-jest": "^28.0.8",
+    "typescript": "^4.7.4"
   }
 }

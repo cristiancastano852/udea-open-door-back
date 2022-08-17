@@ -1,10 +1,12 @@
 import express from 'express';
 import cors from 'cors';
 import {cursosRoutes} from './routes/course.js';
+import {userCoursesTrackRoutes} from './routes/userCoursesTrack.js';
 
 const app = express()
 const port = 3000
 
+app.use(express.json())
 app.use(cors());
 
 app.get('/', (req, res) => {
@@ -14,6 +16,7 @@ app.get('/', (req, res) => {
 })
 
 app.use(cursosRoutes);
+app.use(userCoursesTrackRoutes);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)

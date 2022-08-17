@@ -10,52 +10,65 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User{
-  id          String @id @default(cuid())
-  email       String @unique
+model User {
+  id          String       @id @default(cuid())
+  email       String       @unique
   password    String
   role        String //Admin, User
   userProfile UserProfile?
-  userCourseTrack UserCourseTrack[]
-
 }
 
-model UserProfile{
-  id           String @id @default(cuid())
+model UserProfile {
+  id           String   @id @default(cuid())
   avatar       String
   about        String
   expectations String
   linkedin     String
   age          Int
   joinDate     DateTime @default(now())
-  user         User @relation(fields: [userId], references: [id])
-  userId       String @unique
+
+  user             User              @relation(fields: [userId], references: [id])
+  userId           String            @unique
+  userCourseTracks UserCourseTrack[]
 }
 
-model UserCourseTrack{
+model UserCourseTrack {
   id                  String @id @default(cuid())
   numCoursesCompleted Int
   status              String
-  user                User @relation(fields: [userId], references: [id])
-  userId              String
-  Course             Course[]
+
+  user          UserProfile @relation(fields: [userId], references: [id])
+  userId        String
+  CourseTrack   CourseTrack @relation(fields: [courseTrackId], references: [id])
+  courseTrackId String
 }
 
-model Course{
-  id                  String @id @default(cuid())
-  title               String
-  description         String
-  UserCourseTrack     UserCourseTrack @relation(fields: [userCourseTrackId], references: [id])
-  userCourseTrackId   String
-  CourseContent       CourseContent[]
+model CourseTrack {
+  id         String @id @default(cuid())
+  name       String @unique
+  numCourses Int
+
+  userCourseTracks UserCourseTrack[]
+  courses          Course[]
 }
 
-model CourseContent{
-  id                  String @id @default(cuid())
-  name                String
-  description         String
-  typeFile            String
-  file                String
-  Course              Course @relation(fields: [courseId], references: [id])
-  courseId            String
+model Course {
+  id          String @id @default(cuid())
+  title       String
+  description String
+
+  courseContents CourseContent[]
+  courseTrack    CourseTrack     @relation(fields: [courseTrackId], references: [id])
+  courseTrackId  String
+}
+
+model CourseContent {
+  id          String @id @default(cuid())
+  name        String
+  description String
+  typeFile    String
+  file        String
+
+  Course   Course @relation(fields: [courseId], references: [id])
+  courseId String
 }
