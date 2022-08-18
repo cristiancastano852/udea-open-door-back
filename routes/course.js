@@ -13,28 +13,72 @@ const prisma = new PrismaClient();
 /**
  * @swagger
  * paths:
- *  /courses:
+ *  /courses?offset=0&limit=1:
  *   get:
- *      summary: Show all the avaliable courses regardless of which rout the belong to
+ *      parameters:
+ *          - in: query
+ *            name: offset
+ *            schema:
+ *              type: integer
+ *            description: The number of courses to skip before starting to collect
+ *          - in: query
+ *            name: limit
+ *            schema:
+ *              type: integer
+ *            description: The number of courses to return
+ *      summary: Get required courses per page ragardless of track
  *      tags: [Courses]
  *      responses:
  *          200:
- *              description: Return Courses.json, reachable database and was able to get the courses
+ *              description: It was possible to connect to the database and obtain the courses           
+ *              content:    
+ *                  application/json:
+ *                      schema:
+ *                          properties:
+ *                              title:
+ *                                  type: string
+ *                                  example: Curso de formacion
+ *                              description:
+ *                                  type: string
+ *                                  example: Este es un curso de formacion
+ *                                 
  *          500:
- *              description: Return Unexpected error reaching the database
+ *              description: There was an unexpected error reaching connecting to the database
+ *          
  */
-cursosRoutes.route('/courses').get(async (req, res) => {
-    try {
-        const course = await prisma.course.findMany();
-        console.log(course);
-        res.status(200).json({
-            course,
-        })
-    } catch {
-        res.status(500).json({
-            status: 'Unexpected error',
-        })
+cursosRoutes.route('/courses').get(paginatedCourses()
+/* Otra forma no se en que cambia
+    ,(req, res) => {
+        res.json(res.paginatedCourses)
     }
-});
+*/
+);
 
+function paginatedCourses() {
+    return async (req, res) => {
+        try {
+            const limit = parseInt(req.query.limit);
+            const offset = parseInt(req.query.offset);
+            const course = await prisma.course.findMany({
+                skip: offset,
+                take: limit,
+                select: {
+                    title: true,
+                    description: true,
+                },
+                orderBy: {
+                    title: 'asc',
+                },
+            });
+            console.log(course);
+            res.status(200).json({
+                course,
+            })
+        } catch {
+            res.status(500).json({
+                status: 'Unexpected error',
+            })
+        }
+    }
+}
 export { cursosRoutes };
