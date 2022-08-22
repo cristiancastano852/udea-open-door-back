@@ -11,16 +11,10 @@ datasource db {
 }
 
 model User {
-  id          String       @id @default(cuid())
-  email       String       @unique
-  name        String
-  password    String
-  role        String //Admin, User
-  userProfile UserProfile?
-}
-
-model UserProfile {
   id           String   @id @default(cuid())
+  email        String   @unique
+  password     String
+  name         String
   avatar       String
   about        String
   expectations String
@@ -28,39 +22,75 @@ model UserProfile {
   age          Int
   joinDate     DateTime @default(now())
 
-  user             User              @relation(fields: [userId], references: [id])
-  userId           String            @unique
-  userCourseTracks UserCourseTrack[]
+  userPath   UserPath[]
+  userCourse UserCourse[]
 }
 
-model UserCourseTrack {
-  id                  String @id @default(cuid())
+model Admin {
+  id       String @id @default(cuid())
+  email    String
+  password String
+
+  path   Path[]
+  course Course[]
+}
+
+model UserPath {
+  id  String @id @default(cuid())
   numCoursesCompleted Int
   status              String
 
-  user          UserProfile @relation(fields: [userId], references: [id])
-  userId        String
-  CourseTrack   CourseTrack @relation(fields: [courseTrackId], references: [id])
-  courseTrackId String
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+  path   Path   @relation(fields: [pathId], references: [id])
+  pathId String
 }
 
-model CourseTrack {
+model Path {
   id         String @id @default(cuid())
   name       String @unique
   numCourses Int
 
-  userCourseTracks UserCourseTrack[]
-  courses          Course[]
+  userPath   UserPath[]
+  coursePath CoursePath[]
+  admin      Admin        @relation(fields: [adminId], references: [id])
+  adminId    String
+}
+
+model CoursePath {
+  id  String @id @default(cuid())
+  numOrder Int
+
+  path     Path   @relation(fields: [pathId], references: [id])
+  pathId   String
+  course   Course @relation(fields: [courseId], references: [id])
+  courseId String
+}
+
+model UserCourse {
+  id  String @id @default(cuid())
+  status          String
+  inscriptionDate DateTime @default(now())
+  finishDate      DateTime
+
+  Course   Course @relation(fields: [courseId], references: [id])
+  courseId String
+  user     User   @relation(fields: [userId], references: [id])
+  userId   String
 }
 
 model Course {
-  id          String @id @default(cuid())
+  id          String   @id @default(cuid())
   title       String
   description String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
+  userCourse     UserCourse[]
   courseContents CourseContent[]
-  courseTrack    CourseTrack     @relation(fields: [courseTrackId], references: [id])
-  courseTrackId  String
+  coursePath     CoursePath[]
+  admin          Admin           @relation(fields: [adminId], references: [id])
+  adminId        String
 }
 
 model CourseContent {

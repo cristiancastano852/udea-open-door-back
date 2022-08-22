@@ -1,79 +1,42 @@
 import express from 'express';
 import { PrismaClient } from '@prisma/client';
 
-const cursosRoutes = express.Router();
+const cursoRoutes = express.Router();
 const prisma = new PrismaClient();
 
-/** 
- * @swagger
- * tags:
- *  name: Courses
- *  description: API to get all courses
- */
-/**
- * @swagger
- * paths:
- *  /courses?offset=0&limit=1:
- *   get:
- *      parameters:
- *          - in: query
- *            name: offset
- *            schema:
- *              type: integer
- *            description: The number of courses to skip before starting to collect
- *          - in: query
- *            name: limit
- *            schema:
- *              type: integer
- *            description: The number of courses to return
- *      summary: Get required courses per page ragardless of track
- *      tags: [Courses]
- *      responses:
- *          200:
- *              description: It was possible to connect to the database and obtain the courses           
- *              content:    
- *                  application/json:
- *                      schema:
- *                          properties:
- *                              title:
- *                                  type: string
- *                                  example: Curso de formacion
- *                              description:
- *                                  type: string
- *                                  example: Este es un curso de formacion
- *                                 
- *          500:
- *              description: There was an unexpected error reaching connecting to the database
- *          
- */
-cursosRoutes.route('/courses').get(paginatedCourses()
-/* Otra forma no se en que cambia
-    ,(req, res) => {
-        res.json(res.paginatedCourses)
-    }
-*/
-);
+cursoRoutes.route('/course/:courseId').get(course());
 
-function paginatedCourses() {
+function course() {
     return async (req, res) => {
         try {
-
-            const offset = parseInt(req.query.offset);
-            const limit = parseInt(req.query.limit);
-            const course = await prisma.course.findMany({
-                
-                select: {
-                    id: true,
-                    title: true,
-                    description: true,
+            const courseId = req.params.courseId;
+            let course = await prisma.userCourse.findUnique({
+                where: {
+                    id: courseId,
                 },
-                orderBy: {
-                    title: 'asc',
+                select: {
+                    status: true,
+                    inscriptionDate: true,
+                    finishDate: true,
+                    Course: {
+                        select: {
+                            title: true,
+                            description: true,
+                            createdAt: true,
+                            courseContents: {
+                                select: {
+                                    name:true,
+                                    description:true,
+                                    typeFile:true,
+                                    file:true,
+                                },
+                            },
+                        },
+                    },
                 },
                 skip: offset,
                 take: limit,
             });
-            console.log(course);
             res.status(200).json({
                 paging: {
                     total: course.length,
@@ -89,4 +52,4 @@ function paginatedCourses() {
         }
     }
 }
-export { cursosRoutes };
+export { cursoRoutes };

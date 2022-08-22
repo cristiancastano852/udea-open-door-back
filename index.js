@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
-import {cursosRoutes} from './routes/course.js';
+import {cursosRoutes} from './routes/courses.js';
+import {cursoRoutes} from './routes/course.js';
 import {userCoursesTrackRoutes} from './routes/userCoursesTrack.js';
 import swaggerUi from 'swagger-ui-express';
 import swaggerjsdoc from 'swagger-jsdoc';
@@ -19,6 +20,7 @@ app.get('/', (req, res) => {
 
 app.use(cursosRoutes);
 app.use(userCoursesTrackRoutes);
+app.use(cursoRoutes);
 
 const swaggerSpec= {
   definition: {
