@@ -57,21 +57,29 @@ cursosRoutes.route('/courses').get(paginatedCourses()
 function paginatedCourses() {
     return async (req, res) => {
         try {
-            const limit = parseInt(req.query.limit);
+
             const offset = parseInt(req.query.offset);
+            const limit = parseInt(req.query.limit);
             const course = await prisma.course.findMany({
-                skip: offset,
-                take: limit,
+                
                 select: {
+                    id: true,
                     title: true,
                     description: true,
                 },
                 orderBy: {
                     title: 'asc',
                 },
+                skip: offset,
+                take: limit,
             });
             console.log(course);
             res.status(200).json({
+                paging: {
+                    total: course.length,
+                    offset,
+                    limit,
+                  },
                 course,
             })
         } catch {
