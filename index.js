@@ -14,7 +14,7 @@ app.use(cors());
 
 app.get('/', (req, res) => {
   res.status(200).json({
-    message:'Hola Mundo!', 
+    message:'This is API for courses', 
     status: 'OK'})
 })
 
