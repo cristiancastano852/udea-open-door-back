@@ -10,30 +10,27 @@ function course() {
     return async (req, res) => {
         try {
             const courseId = req.params.courseId;
-            let course = await prisma.userCourse.findUnique({
+            let course = await prisma.Course.findUnique({
+
                 where: {
                     id: courseId,
                 },
+
                 select: {
-                    status: true,
-                    inscriptionDate: true,
-                    finishDate: true,
-                    Course: {
+                    title: true,
+                    description: true,
+                    createdAt: true,
+                    courseContents: {
                         select: {
-                            title: true,
+                            name: true,
                             description: true,
-                            createdAt: true,
-                            courseContents: {
-                                select: {
-                                    name:true,
-                                    description:true,
-                                    typeFile:true,
-                                    file:true,
-                                },
-                            },
+                            typeFile: true,
+                            file: true,
                         },
                     },
                 },
+
+
             });
             res.status(200).json({
                 course,
