@@ -6,7 +6,11 @@
   "author": "Cristian Castaño <cristian.castano1@udea.edu.co>",
   "license": "MIT",
   "type": "module",
+  "engines":{
+    "node": "14.17.6"
+  },
   "scripts": {
+    "start": "node index.js",
     "dev": "nodemon index.js"
   },
   "dependencies": {
