@@ -3,7 +3,6 @@ import cors from 'cors';
 import {cursosRoutes} from './routes/courses.js';
 import {cursoRoutes} from './routes/course.js';
 import {userCoursesTrackRoutes} from './routes/userCoursesTrack.js';
-import { courseCreate } from './routes/courseCreate.js';
 import swaggerUi from 'swagger-ui-express';
 import swaggerjsdoc from 'swagger-jsdoc';
 
@@ -22,7 +21,6 @@ app.get('/', (req, res) => {
 app.use(cursosRoutes);
 app.use(userCoursesTrackRoutes);
 app.use(cursoRoutes);
-app.use(courseCreate);
 
 const swaggerSpec= {
   definition: {
