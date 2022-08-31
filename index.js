@@ -34,7 +34,7 @@ const swaggerSpec= {
     },
     servers: [
       {
-        url: 'http://localhost:3000',
+        url: 'https://back-open-door-int.vercel.app/',
       },
     ],
   },

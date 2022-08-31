@@ -59,8 +59,14 @@ function paginatedCourses() {
     return async (req, res) => {
         try {
 
-            const offset = parseInt(req.query.offset);
-            const limit = parseInt(req.query.limit);
+            const limit =
+                req.query.results && req.query.results != ""
+                ? Number(req.query.results)
+                : 2;
+            const offset =
+                req.query.offset && req.query.offset != ""
+                ? Number(req.query.offset)
+                : 0;
             const courses = await prisma.course.findMany({
                 select: {
                     id: true,
