@@ -16,7 +16,7 @@ const prisma = new PrismaClient();
  *  /course/:courseId:
  *   get:
  *      parameters:
- *          - in: query|            
+ *          - in: params            
  *            name: courseId
  *            schema:
  *              type: string
@@ -46,7 +46,10 @@ const prisma = new PrismaClient();
  *                                      description: Documento que tiene las habilidades para la vida
  *                                      typeFile: pdf
  *                                      file: https://drive.google.com/uc?id=1K-xVrXnuQAbdELzzq1c7Y_PKECnImm5a&export=download
- *                                 
+ *          
+ *          204:
+ *              description: No course with that Id, doesn't need to navigate away from its current page
+ *              
  *          500:
  *              description: There was an unexpected error reaching connecting to the database
  *          
@@ -57,7 +60,7 @@ cursoRoutes.route('/course/:courseId').get(course());
 function course() {
     return async (req, res) => {
         try {
-            const courseId = req.query.courseId;
+            const courseId = req.params.courseId;
             let course = await prisma.Course.findUnique({
 
                 where: {
@@ -78,9 +81,15 @@ function course() {
                     },
                 },
             });
-            res.status(200).json({
-                course,
-            })
+            if (course === null) {
+                res.status(204).json({
+                    status: 'No existe',
+                })
+            } else {
+                res.status(200).json({
+                    course,
+                })
+            }
         } catch {
             res.status(500).json({
                 status: 'Unexpected error',

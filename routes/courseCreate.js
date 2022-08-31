@@ -9,7 +9,7 @@ const adminId = 'cl70pwhnd00315smktoxy1av6';
  * @swagger
  * tags:
  *  name: Create Course
- *  description: API to create a course
+ *  description: Endpoint to create a course
  */
 /**
  * @swagger
