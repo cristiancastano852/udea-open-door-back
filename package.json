@@ -6,7 +6,7 @@
   "author": "Cristian Castaño <cristian.castano1@udea.edu.co>",
   "license": "MIT",
   "type": "module",
-  "engines":{
+  "engines": {
     "node": "14.17.6"
   },
   "scripts": {
@@ -14,9 +14,11 @@
     "dev": "nodemon index.js"
   },
   "dependencies": {
+    "@google-cloud/local-auth": "^2.1.0",
     "@prisma/client": "^4.2.1",
     "cors": "^2.8.5",
     "express": "^4.18.1",
+    "googleapis": "^105.0.0",
     "swagger-jsdoc": "5.0.1",
     "swagger-ui-express": "^4.5.0"
   },

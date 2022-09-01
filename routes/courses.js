@@ -8,7 +8,7 @@ const prisma = new PrismaClient();
  * @swagger
  * tags:
  *  name: Courses
- *  description: API to get all courses
+ *  description: Endpoint to get all courses
  */
 /**
  * @swagger
