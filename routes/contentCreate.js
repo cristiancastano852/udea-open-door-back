@@ -8,10 +8,10 @@ import fs from 'fs';
 const contentCreate = express.Router();
 const prisma = new PrismaClient();
 
-const CLIENT_ID = "645363119708-aum4rgpctr06kbh2uk892hq2tk7g4db9.apps.googleusercontent.com";
-const CLIENT_SECRET = "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";
+const CLIENT_ID = "";
+const CLIENT_SECRET = "";
 const REDIRECT_URI = "https://developers.google.com/oauthplayground";
-const REFREESH_TOKEN = "1//04rppKFtgwbUqCgYIARAAGAQSNwF-L9Ir4aboa5LH7d5-EADgvoOJ6L1VWjkcmwNgZsi3IqNmv9QFLP35QDLP1vXMTtLOqN08Td0";
+const REFREESH_TOKEN = "";
 
 contentCreate.route('/createContent').get(test());
 
