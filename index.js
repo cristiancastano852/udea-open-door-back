@@ -1,10 +1,10 @@
 import express from 'express';
 import cors from 'cors';
-import {cursosRoutes} from './routes/courses.js';
-import {cursoRoutes} from './routes/course.js';
-import {userCoursesTrackRoutes} from './routes/userCoursesTrack.js';
+import { cursosRoutes } from './routes/courses.js';
+import { cursoRoutes } from './routes/course.js';
+import { userCoursesTrackRoutes } from './routes/userCoursesTrack.js';
 import { courseCreate } from './routes/courseCreate.js';
-import { contentCreate } from './routes/contentCreate.js';
+import { userRoutes } from './routes/userProfile.js';
 import swaggerUi from 'swagger-ui-express';
 import swaggerjsdoc from 'swagger-jsdoc';
 
@@ -16,17 +16,18 @@ app.use(cors());
 
 app.get('/', (req, res) => {
   res.status(200).json({
-    message:'This is API for courses', 
-    status: 'OK'})
+    message: 'This is API for courses',
+    status: 'OK'
+  })
 })
 
 app.use(cursosRoutes);
 app.use(userCoursesTrackRoutes);
 app.use(cursoRoutes);
 app.use(courseCreate);
-app.use(contentCreate);
+app.use(userRoutes);
 
-const swaggerSpec= {
+const swaggerSpec = {
   definition: {
     components: {},
     openapi: '3.0.0',
@@ -45,9 +46,9 @@ const swaggerSpec= {
 
 //middleware
 app.use("/api-docs",
-        swaggerUi.serve,
-        swaggerUi.setup(swaggerjsdoc(swaggerSpec))
-        );
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerjsdoc(swaggerSpec))
+);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)

@@ -15,12 +15,17 @@ const prisma = new PrismaClient();
  * paths:
  *  /course/:courseId:
  *   get:
- *      parameters:
- *          - in: params            
+ *      body:
+ *          - in: body            
  *            name: courseId
  *            schema:
  *              type: string
  *            description: The id of the course to get
+ *          - in: body
+ *            name: userId
+ *            schema:
+ *              type: string
+ *            description: The id of the user 
  *      summary: Get a specific course with all attributes and content
  *      tags: [Course]
  *      responses:
@@ -30,25 +35,25 @@ const prisma = new PrismaClient();
  *                  application/json:
  *                      schema:
  *                          properties:
+ *                              status:
+ *                                  type: string
+ *                                  example: AbleToStart
  *                              title:
  *                                  type: string
  *                                  example: Habilidades para la vida
  *                              description:
  *                                  type: string
  *                                  example: Este curso enseña sobre habilidades para la vida
- *                              createAt:
- *                                  type: string
- *                                  example: 2022-12-13T23:59:59.SSSZ
  *                              courseContents:
  *                                  type: json
  *                                  example:
  *                                      name: Habilidades para la vida
  *                                      description: Documento que tiene las habilidades para la vida
- *                                      typeFile: pdf
- *                                      file: https://drive.google.com/uc?id=1K-xVrXnuQAbdELzzq1c7Y_PKECnImm5a&export=download
+ *                                      contentType: resource
+ *                                      url: https://drive.google.com/uc?id=1K-xVrXnuQAbdELzzq1c7Y_PKECnImm5a&export=download
  *          
  *          204:
- *              description: No course with that Id, doesn't need to navigate away from its current page
+ *              description: No course with that id for the user id, doesn't need to navigate away from its current page
  *              
  *          500:
  *              description: There was an unexpected error reaching connecting to the database
@@ -61,22 +66,29 @@ function course() {
     return async (req, res) => {
         try {
             const courseId = req.params.courseId;
-            let course = await prisma.Course.findUnique({
+            const userId = 'cl7pdqmdk0076wwmkvrgr53us';
+            console.log(courseId)
+            let course = await prisma.userCourse.find({
 
                 where: {
-                    id: courseId,
+                    courseId: courseId,
+                    userId: userId,
                 },
 
                 select: {
-                    title: true,
-                    description: true,
-                    createdAt: true,
-                    courseContents: {
+                    status: true,
+                    Course: {
                         select: {
-                            name: true,
+                            title: true,
                             description: true,
-                            typeFile: true,
-                            file: true,
+                            courseContents: {
+                                select: {
+                                    name: true,
+                                    description: true,
+                                    contentType: true,
+                                    url: true,
+                                },
+                            },
                         },
                     },
                 },
