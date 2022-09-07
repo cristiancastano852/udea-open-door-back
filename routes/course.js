@@ -60,13 +60,14 @@ const prisma = new PrismaClient();
  *          
  */
 
-cursoRoutes.route('/course/detail/:courseId').get( course());
+cursoRoutes.route('/course/detail/:courseId').get(course());
 
 function course() {
     return async (req, res) => {
         try {
+            console.log("probandooooo1");
             const courseId = req.params.courseId;
-            const userId = 'cl7pdqmdk0076wwmkvrgr53us';
+            const userId = req.body.userId;
             console.log("probandooooo");
             console.log(courseId);
             console.log(userId);
