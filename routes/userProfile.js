@@ -1,7 +1,7 @@
 import express from 'express';
 import { PrismaClient } from '@prisma/client';
 
-const userRoutes = express.Router();
+const userProfileRoutes = express.Router();
 const prisma = new PrismaClient();
 
 /** 
@@ -61,7 +61,7 @@ const prisma = new PrismaClient();
  */
 
 
-userRoutes.route('/user/:userId').get(userProfile());
+userProfileRoutes.route('/user/:userId').get(userProfile());
 
 function userProfile() {
     return async (req, res) => {
@@ -100,4 +100,4 @@ function userProfile() {
     }
 }
 
-export { userRoutes };
+export { userProfileRoutes };

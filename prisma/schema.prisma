@@ -27,7 +27,7 @@ model User {
 
 model Admin {
   id       String @id @default(cuid())
-  email    String
+  email    String @unique
 
   path   Path[]
   course Course[]
