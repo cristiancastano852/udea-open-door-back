@@ -30,7 +30,7 @@ function course() {
                             courseContents: {
                                 select: {
                                     name: true,
-                                    // description: true,
+                                    description: true,
                                     // contentType: true,
                                     //url: true
                                 },
