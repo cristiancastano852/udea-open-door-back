@@ -27,14 +27,14 @@ function course() {
                         select: {
                             title: true,
                             description: true,
-                            // courseContents: {
-                            //     select: {
-                            //         name: true,
-                            //         description: true,
-                            //         contentType: true,
-                            //         url: true,
-                            //     },
-                            // },
+                            courseContents: {
+                                select: {
+                                    name: true,
+                                    description: true,
+                                    contentType: true,
+                                    url: true,
+                                },
+                            },
                         },
                     },
                 },
