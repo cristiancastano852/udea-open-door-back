@@ -32,7 +32,7 @@ function course() {
                                     name: true,
                                     description: true,
                                     contentType: true,
-                                    url: true,
+                                    //url: true
                                 },
                             },
                         },
