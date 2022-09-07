@@ -32,8 +32,8 @@ function course() {
                                     //name: true,
                                     // description: true,
                                     // contentType: true,
-                                    contentType: true,
-                                    //url: true
+                                    //contentType: true,
+                                    url: true
                                 },
                             },
                         },
@@ -52,7 +52,7 @@ function course() {
             }
         } catch {
             res.status(500).json({
-                status: 'A error 500: Unexpected error',
+                status: 'A error -  500: Unexpected error',
             })
         }
     }
