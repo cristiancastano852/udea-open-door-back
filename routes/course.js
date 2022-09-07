@@ -65,7 +65,7 @@ cursoRoutes.route('/course/:courseId').get( course());
 function course() {
     return async (req, res) => {
         try {
-            const courseId = req.body.courseId;
+            const courseId = req.params.courseId;
             const userId = 'cl7pdqmdk0076wwmkvrgr53us';
             let course = await prisma.userCourse.findMany({
 
