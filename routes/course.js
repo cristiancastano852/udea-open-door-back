@@ -63,18 +63,18 @@ const prisma = new PrismaClient();
 cursoRoutes.route('/course/:courseId').get( course());
 
 function course() {
-    console.log('course');
     return async (req, res) => {
         try {
             const courseId = req.params.courseId;
             const userId = 'cl7pdqmdk0076wwmkvrgr53us';
+            console.log("probandooooo");
+            console.log(courseId);
+            console.log(userId);
             let course = await prisma.userCourse.findMany({
-
                 where: {
                     courseId: courseId,
                     userId: userId,
                 },
-
                 select: {
                     status: true,
                     Course: {
@@ -93,6 +93,7 @@ function course() {
                     },
                 },
             });
+            console.log("Funciona");
             if (course === null) {
                 res.status(204).json({
                     status: 'No existe',
@@ -104,7 +105,7 @@ function course() {
             }
         } catch {
             res.status(500).json({
-                status: 'Unexpected error',
+                status: 'Error 500: Unexpected error',
             })
         }
     }

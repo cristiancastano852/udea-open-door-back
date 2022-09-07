@@ -62,20 +62,17 @@ function status() {
         try {
             const {courseId, userId, statusCourse} = req.body;
             console.log(courseId, userId, statusCourse);
-            const course = await prisma.UserCourse.findUnique({
+            const course = await prisma.UserCourse.findMany({
                 where: {
                         userId: userId,
                         courseId: courseId
                 }
             });
-            console.log("holaaa");
+            console.log(course);
             if(course) {
                 const updateCourse = await prisma.userCourse.update({
                     where: {
-                        userId_courseId: {
-                            userId: userId,
-                            courseId: courseId
-                        }
+                        id: course[0].id
                     },
                     data: {
                         status: statusCourse,
