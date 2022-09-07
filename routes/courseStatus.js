@@ -13,7 +13,7 @@ const prisma = new PrismaClient();
 /**
  * @swagger
  * paths:
- *  /course/:courseId:
+ *  /course/status:
  *   get:
  *      parameters:
  *          - in: params            

@@ -60,7 +60,7 @@ const prisma = new PrismaClient();
  *          
  */
 
-cursoRoutes.route('/course/:courseId').get( course());
+cursoRoutes.route('/course/detail/:courseId').get( course());
 
 function course() {
     return async (req, res) => {
