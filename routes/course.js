@@ -23,20 +23,20 @@ function course() {
                 },
                 select: {
                     status: true,
-                    // Course: {
-                    //     select: {
-                    //         title: true,
-                    //         description: true,
-                    //         courseContents: {
-                    //             select: {
-                    //                 name: true,
-                    //                 description: true,
-                    //                 contentType: true,
-                    //                 url: true,
-                    //             },
-                    //         },
-                    //     },
-                    // },
+                    Course: {
+                        select: {
+                            title: true,
+                            description: true,
+                            // courseContents: {
+                            //     select: {
+                            //         name: true,
+                            //         description: true,
+                            //         contentType: true,
+                            //         url: true,
+                            //     },
+                            // },
+                        },
+                    },
                 },
             });
             console.log("Funciona");
@@ -51,7 +51,7 @@ function course() {
             }
         } catch {
             res.status(500).json({
-                status: 'Error 500: Unexpected error',
+                status: 'Error-500: Unexpected error',
             })
         }
     }
