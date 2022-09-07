@@ -30,9 +30,9 @@ function course() {
                             courseContents: {
                                 select: {
                                     name: true,
-                                    // description: true,
-                                    // contentType: true,
-                                    //url: true
+                                    description: true,
+                                    contentType: true,
+                                    url: true
                                 },
                             },
                         },
