@@ -62,7 +62,7 @@ function paginatedCourses() {
             const limit =
                 req.query.results && req.query.results != ""
                 ? Number(req.query.results)
-                : 2;
+                : 10;
             const offset =
                 req.query.offset && req.query.offset != ""
                 ? Number(req.query.offset)
