@@ -7,14 +7,14 @@ const prisma = new PrismaClient();
 /** 
  * @swagger
  * tags:
- *  name: Course
- *  description: Endpoint to get a course
+ *  name: Course Status
+ *  description: Endpoint to patch a course
  */
 /**
  * @swagger
  * paths:
  *  /course/status:
- *   get:
+ *   patch:
  *      parameters:
  *          - in: params            
  *            name: courseId
@@ -22,7 +22,7 @@ const prisma = new PrismaClient();
  *              type: string
  *            description: The id of the course to get
  *      summary: Get a specific course with all attributes and content
- *      tags: [Course]
+ *      tags: [Course Status]
  *      responses:
  *          200:
  *              description: It was possible to connect to the database and obtain the course           

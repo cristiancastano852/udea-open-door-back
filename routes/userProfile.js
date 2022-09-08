@@ -7,22 +7,26 @@ const prisma = new PrismaClient();
 /** 
  * @swagger
  * tags:
- *  name: User
+ *  name: User Profile
  *  description: Endpoint to get the user information
  */
 /**
  * @swagger
  * paths:
- *  /user/:userId:
+ *  /userProfile/:userId:
  *   get:
- *      body:
+ *      parameters:
  *          - in: body
  *            name: userId
  *            schema:
- *              type: string
+ *             type: object
+ *             properties:
+ *              userId:
+ *               type: string
+ *               example: cl7thojl40138mkmkczusfmml
  *            description: The id of the user 
  *      summary: Get the profile information for a user
- *      tags: [User]
+ *      tags: [User Profile]
  *      responses:
  *          200:
  *              description: It was possible to connect to the database and obtain the user           
@@ -44,7 +48,7 @@ const prisma = new PrismaClient();
  *                                  example: To complete the courses
  *                              linkedin: 
  *                                  type: string
- *                                  example: https://www.linkedin.com/in/user/
+ *                                  example: https://www.linkedin.com/in/
  *                              age:
  *                                  type: string
  *                                  example: 21
@@ -61,7 +65,7 @@ const prisma = new PrismaClient();
  */
 
 
-userProfileRoutes.route('/user/:userId').get(userProfile());
+userProfileRoutes.route('/userProfile/:userId').get(userProfile());
 
 function userProfile() {
     return async (req, res) => {

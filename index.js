@@ -1,12 +1,14 @@
 import express from 'express';
 import cors from 'cors';
 import { cursosRoutes } from './routes/courses.js';
-import { cursoRoutes } from './routes/course.js';
+import { cursoRoutes } from './routes/userCourse.js';
 import { userCoursesTrackRoutes } from './routes/userCoursesTrack.js';
 import { courseCreate } from './routes/courseCreate.js';
 import { userProfileRoutes } from './routes/userProfile.js';
-import { userRoutes } from './routes/user.js';
+import { userRoutes } from './routes/userRole.js';
 import { courseStatus } from './routes/courseStatus.js';
+import { userTrack } from './routes/userTrack.js';
+import { courseContentCreate } from './routes/courseContent.js';
 import swaggerUi from 'swagger-ui-express';
 import swaggerjsdoc from 'swagger-jsdoc';
 
@@ -18,7 +20,7 @@ app.use(cors());
 
 app.get('/', (req, res) => {
   res.status(200).json({
-    message: 'This is API for Open-door',
+    message: 'This is API for Open-Door',
     status: 'OK'
   })
 })
@@ -30,6 +32,8 @@ app.use(courseCreate);
 app.use(userProfileRoutes);
 app.use(userRoutes);
 app.use(courseStatus);
+app.use(userTrack);
+app.use(courseContentCreate);
 
 const swaggerSpec = {
   definition: {
@@ -41,7 +45,7 @@ const swaggerSpec = {
     },
     servers: [
       {
-        url: 'https://back-open-door-int.vercel.app/',
+        url: 'https://back-open-door-int.vercel./',
       },
     ],
   },
