@@ -61,13 +61,16 @@ function status() {
     return async (req, res) => {
         try {
             const {courseId, userId, statusCourse} = req.body;
-            const course = await prisma.UserCourse.findMany({
+            let course = await prisma.UserCourse.findMany({
                 where: {
                         userId: userId,
                         courseId: courseId
                 }
             });
-            if(course) {
+            const date = Date.now();
+            const finishDate = new Date(date);
+            
+            if(course.length != 0) {
                 const updateCourse = await prisma.userCourse.update({
                     where: {
                         id: course[0].id
@@ -83,6 +86,7 @@ function status() {
                         userId: userId,
                         courseId: courseId,
                         status: statusCourse,
+                        finishDate: "1970-01-01T00:00:00.000Z"
                     }
                 });
                 res.status(200).json(newCourse);
