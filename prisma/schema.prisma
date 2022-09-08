@@ -86,7 +86,7 @@ model CourseContent {
   name        String
   description String
   courseId    String
-  contentType String
+  typeContent String
   url         String
   Course      Course @relation(fields: [courseId], references: [id])
 }
