@@ -11,8 +11,6 @@ function course() {
         try {
             const courseId = req.params.courseId;
             const userId = "cl7sbq54m0051icmknux1kuow";
-            console.log(courseId);
-            console.log(userId);
             let course = await prisma.userCourse.findMany({
                 where: {
                     courseId: courseId,
@@ -36,7 +34,6 @@ function course() {
                     },
                 },
             });
-            console.log("Funciona");
             if (course === null) {
                 res.status(204).json({
                     status: 'No existe',
