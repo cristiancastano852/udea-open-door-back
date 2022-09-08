@@ -8,14 +8,9 @@ cursoRoutes.route('/course/detail/:courseId').get(course());
 
 function course() {
     return async (req, res) => {
-        console.log("probandooooo1");
         try {
-            console.log("probandooooo1");
             const courseId = req.params.courseId;
-            const userId = req.body.userId;
-            console.log("probandooooo");
-            console.log(courseId);
-            console.log(userId);
+            const userId = "cl7sbq54m0051icmknux1kuow";
             let course = await prisma.userCourse.findMany({
                 where: {
                     courseId: courseId,
@@ -29,18 +24,16 @@ function course() {
                             description: true,
                             courseContents: {
                                 select: {
-                                    //name: true,
-                                    // description: true,
-                                    // contentType: true,
-                                     contentType: true,
-                                    //url: true
+                                    name: true,
+                                    description: true,
+                                    typeFile: true,
+                                    file: true,
                                 },
                             },
                         },
                     },
                 },
             });
-            console.log("Funciona");
             if (course === null) {
                 res.status(204).json({
                     status: 'No existe',
