@@ -28,8 +28,8 @@ function course() {
                                 select: {
                                     name: true,
                                     description: true,
-                                    typeContent: true,
-                                    url: true
+                                    //typeContent: true,
+                                    //url: true
                                 },
                             },
                         },
