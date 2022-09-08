@@ -7,6 +7,7 @@ const prisma = new PrismaClient();
 // Si se logra el login busca, o que busque y diga si encuentra o no?
 
 userRoutes.route('/user').get(getUser());
+userRoutes.route('/admin').get(getAdmin());
 
 function getUser() {
     return async (req, res) => {
@@ -53,6 +54,38 @@ function getUser() {
         } catch {
             res.status(500).json({
                 status: 'Error 1quinientos: Unexpected error',
+            })
+        }
+    }
+}
+
+function getAdmin() {
+    return async (req, res) => {
+        try {
+            const email = req.body.email;
+            let admin = await prisma.admin.findUnique({
+
+                where: {
+                    email:email,
+                },
+
+                select: {
+                    id: true,
+                },
+            });
+            
+            if (admin != null){
+                res.status(200).json({
+                    admin, rol: 'user',
+                })
+            }else{
+                res.status(204).json({
+                    status: 'No existe',
+                })
+            }
+        } catch {
+            res.status(500).json({
+                status: 'Error 2quinientos: Unexpected error',
             })
         }
     }
