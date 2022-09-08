@@ -76,7 +76,7 @@ function getAdmin() {
             
             if (admin != null){
                 res.status(200).json({
-                    admin, rol: 'user',
+                    admin, rol: 'admin',
                 })
             }else{
                 res.status(204).json({
