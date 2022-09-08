@@ -47,7 +47,7 @@ function getUser() {
             }
         } catch {
             res.status(500).json({
-                status: 'Unexpected error',
+                status: 'Error 500: Unexpected error',
             })
         }
     }
