@@ -12,7 +12,7 @@ function getUser() {
     return async (req, res) => {
         try {
             const email = req.body.email;
-            let user = await prisma.user.findMany({
+            let user = await prisma.user.findUnique({
 
                 where: {
                     email:email,
@@ -22,7 +22,7 @@ function getUser() {
                     id: true,
                 },
             });
-            let admin = await prisma.admin.findMany({
+            let admin = await prisma.admin.findUnique({
 
                 where: {
                     email:email,
@@ -36,15 +36,13 @@ function getUser() {
                 res.status(204).json({
                     status: 'No existe',
                 })
-            } if (admin != null) {
-                console("admin", admin);
+            } else if (user != null){
+                res.status(200).json({
+                    user, rol: 'user',
+                })
+            } else if (admin != null){
                 res.status(200).json({
                     admin, rol: "admin",
-                })
-            } else {
-                console("user", user);
-                res.status(200).json({
-                    user, rol: "user",
                 })
             }
         } catch {
