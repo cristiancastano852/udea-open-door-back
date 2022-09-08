@@ -12,17 +12,7 @@ function getUser() {
     return async (req, res) => {
         try {
             const email = req.body.email;
-            // let user = await prisma.user.findUnique({
-
-            //     where: {
-            //         email:email,
-            //     },
-
-            //     select: {
-            //         id: true,
-            //     },
-            // });
-            let user = await prisma.admin.findUnique({
+            let user = await prisma.user.findUnique({
 
                 where: {
                     email:email,
@@ -32,6 +22,16 @@ function getUser() {
                     id: true,
                 },
             });
+            // let admin = await prisma.admin.findUnique({
+
+            //     where: {
+            //         email:email,
+            //     },
+
+            //     select: {
+            //         id: true,
+            //     },
+            // });
             // if (user === null && admin === null) {
             //     res.status(204).json({
             //         status: 'No existe',
