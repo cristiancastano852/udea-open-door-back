@@ -6,6 +6,7 @@ import { userCoursesTrackRoutes } from './routes/userCoursesTrack.js';
 import { courseCreate } from './routes/courseCreate.js';
 import { userProfileRoutes } from './routes/userProfile.js';
 import { userRoutes } from './routes/user.js';
+import { courseStatus } from './routes/courseStatus.js';
 import swaggerUi from 'swagger-ui-express';
 import swaggerjsdoc from 'swagger-jsdoc';
 
@@ -28,6 +29,7 @@ app.use(cursoRoutes);
 app.use(courseCreate);
 app.use(userProfileRoutes);
 app.use(userRoutes);
+app.use(courseStatus);
 
 const swaggerSpec = {
   definition: {
