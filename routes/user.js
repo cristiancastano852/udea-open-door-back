@@ -22,7 +22,7 @@ function getUser() {
                     id: true,
                 },
             });
-            let admin = await prisma.admin.findUniqueOrThrow({
+            let admin = await prisma.admin.findUnique({
 
                 where: {
                     email:email,
@@ -48,7 +48,7 @@ function getUser() {
             }
         } catch {
             res.status(500).json({
-                status: 'Error quinientos: Unexpected error',
+                status: 'Error 1quinientos: Unexpected error',
             })
         }
     }
