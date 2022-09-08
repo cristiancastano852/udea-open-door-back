@@ -12,7 +12,7 @@ function getUser() {
     return async (req, res) => {
         try {
             const email = req.body.email;
-            let user = await prisma.user.findMany({
+            let user = await prisma.user.findUnique({
 
                 where: {
                     email:email,
@@ -22,7 +22,7 @@ function getUser() {
                     id: true,
                 },
             });
-            let admin = await prisma.admin.findMany({
+            let admin = await prisma.admin.findUnique({
 
                 where: {
                     email:email,
@@ -47,7 +47,7 @@ function getUser() {
             }
         } catch {
             res.status(500).json({
-                status: 'Error 500: Unexpected error',
+                status: 'Error -Z500: Unexpected error',
             })
         }
     }
