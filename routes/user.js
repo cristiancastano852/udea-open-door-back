@@ -12,7 +12,7 @@ function getUser() {
     return async (req, res) => {
         try {
             const email = req.body.email;
-            let user = await prisma.user.findUnique({
+            let user = await prisma.user.findMany({
 
                 where: {
                     email:email,
@@ -22,7 +22,7 @@ function getUser() {
                     id: true,
                 },
             });
-            let admin = await prisma.admin.findUnique({
+            let admin = await prisma.admin.findMany({
 
                 where: {
                     email:email,
