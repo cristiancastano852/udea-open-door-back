@@ -10,7 +10,7 @@ function course() {
     return async (req, res) => {
         try {
             const courseId = req.params.courseId;
-            const userId = "cl7sbco760080bsmkmi7hvv8k";
+            const userId = "cl7sbq54m0051icmknux1kuow";
             console.log(courseId);
             console.log(userId);
             let course = await prisma.userCourse.findMany({
@@ -28,8 +28,8 @@ function course() {
                                 select: {
                                     name: true,
                                     description: true,
-                                    //typeContent: true,
-                                    //url: true
+                                    typeFile: true,
+                                    file: true,
                                 },
                             },
                         },
