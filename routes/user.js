@@ -22,16 +22,16 @@ function getUser() {
                     id: true,
                 },
             });
-            // let admin = await prisma.admin.findUniqueOrThrow({
+            let admin = await prisma.admin.findUniqueOrThrow({
 
-            //     where: {
-            //         email:email,
-            //     },
+                where: {
+                    email:email,
+                },
 
-            //     select: {
-            //         id: true,
-            //     },
-            // });
+                select: {
+                    id: true,
+                },
+            });
             // if (user === null && admin === null) {
             //     res.status(204).json({
             //         status: 'No existe',
