@@ -45,7 +45,7 @@ const swaggerSpec = {
     },
     servers: [
       {
-        url: 'https://back-open-door-int.vercel./',
+        url: 'https://back-open-door-int-git-develop-cristiancastano852.vercel.app/',
       },
     ],
   },
