@@ -61,14 +61,12 @@ function status() {
     return async (req, res) => {
         try {
             const {courseId, userId, statusCourse} = req.body;
-            console.log(courseId, userId, statusCourse);
             const course = await prisma.UserCourse.findMany({
                 where: {
                         userId: userId,
                         courseId: courseId
                 }
             });
-            console.log(course);
             if(course) {
                 const updateCourse = await prisma.userCourse.update({
                     where: {
