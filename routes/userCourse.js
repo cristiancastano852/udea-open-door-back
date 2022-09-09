@@ -86,8 +86,19 @@ function course() {
                 },
             });
             if (course === null || course.length === 0) {
-                res.status(204).json({
-                    status: 'No existe',
+
+                let course = await prisma.course.findUnique({
+                    where: {
+                        id: courseId,
+                    },
+                    select: {
+                        title:true,
+                        description:true
+                    }
+                })
+
+                res.status(200).json({
+                    course, status: 'AbleToStart'
                 })
             } else {
                 res.status(200).json({
