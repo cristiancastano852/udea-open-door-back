@@ -95,7 +95,35 @@ function course() {
                         finishDate: "1970-01-01T00:00:00.000Z"
                     }
                 });
-                
+
+                let course = await prisma.userCourse.findMany({
+                    where: {
+                        courseId: courseId,
+                        userId: userId,
+                    },
+                    select: {
+                        status: true,
+                        Course: {
+                            select: {
+                                title: true,
+                                description: true,
+                                courseContents: {
+                                    select: {
+                                        name: true,
+                                        description: true,
+                                        typeFile: true,
+                                        file: true,
+                                    },
+                                },
+                            },
+                        },
+                    },
+                });
+
+                res.status(200).json({
+                    course,
+                })
+
             } else {
                 res.status(200).json({
                     course,
