@@ -87,19 +87,15 @@ function course() {
             });
             if (course === null || course.length === 0) {
 
-                let course = await prisma.course.findUnique({
-                    where: {
-                        id: courseId,
-                    },
-                    select: {
-                        title:true,
-                        description:true
+                const userCourse = await prisma.userCourse.create({
+                    data: {
+                        userId: userId,
+                        courseId: courseId,
+                        status: "AbleToStart",
+                        finishDate: "1970-01-01T00:00:00.000Z"
                     }
-                })
-
-                res.status(200).json({
-                    course, status: 'AbleToStart'
-                })
+                });
+                
             } else {
                 res.status(200).json({
                     course,
