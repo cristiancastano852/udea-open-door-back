@@ -53,7 +53,7 @@ userRoutes.route('/getRole').get(getUser());
 function getUser() {
     return async (req, res) => {
         try {
-            const email = req.body.email;
+            const email = req.header.email;
             let user = await prisma.user.findUnique({
 
                 where: {
