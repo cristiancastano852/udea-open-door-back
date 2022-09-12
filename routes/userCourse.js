@@ -61,7 +61,8 @@ function course() {
     return async (req, res) => {
         try {
             const courseId = req.params.courseId;
-            const userId = req.header.userId;
+            const userId = req.headers.userid;
+            console.log(userId)
             let course = await prisma.userCourse.findMany({
                 where: {
                     courseId: courseId,

@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 const userCoursesTrackRoutes = express.Router();
 
 userCoursesTrackRoutes.route('/userCoursesTrack').get(async (req, res) => {
-    const userData = req.header;
+    const userData = req.headers;
     const userCoursesTrack = await prisma.courseTrack.findUnique({
         where: {
                 id: userData.userId
