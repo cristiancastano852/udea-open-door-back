@@ -58,7 +58,8 @@ function createUser() {
                     name: '',
                     about: '',
                     age: 0,
-                    expectations: ''
+                    expectations: '',
+                    linkedin: ''
 
                 },
             });
@@ -69,7 +70,7 @@ function createUser() {
         } catch (error) {
             console.log(error)
              res.status(500).json({
-                status: 'A error - - 500: Unexpected er',
+                status: 'A error - - 500: Unexpected e',
             })
         }
     }
