@@ -57,7 +57,8 @@ function createUser() {
                     email: userEmail,
                     name: '',
                     about: '',
-                    age: 0
+                    age: 0,
+                    expectations: ''
 
                 },
             });
@@ -68,7 +69,7 @@ function createUser() {
         } catch (error) {
             console.log(error)
              res.status(500).json({
-                status: 'A error - - 500: Unexpected err',
+                status: 'A error - - 500: Unexpected er',
             })
         }
     }
