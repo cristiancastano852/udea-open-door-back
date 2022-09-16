@@ -50,6 +50,7 @@ function createUser() {
 
     return async (req, res) => {
 
+        try {
             const userEmail = req.body.userEmail;
             const user = await prisma.User.create({
                 data: {
@@ -66,7 +67,12 @@ function createUser() {
             res.status(200).json({
                 userId, message: 'User created successfully',
             })
-
+        } catch (error) {
+            console.log(error)
+            res.status(500).json({
+                status: 'A error - - 500: Unexpected error',
+            })
+        }
     }
 }
 export { userCreate };
