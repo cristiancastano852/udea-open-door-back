@@ -54,7 +54,7 @@ function createUser() {
             const userEmail = req.body.userEmail;
             const user = await prisma.User.create({
                 data: {
-                    email: userEmail,
+                    email: userEmail
 
                 },
             });
@@ -65,7 +65,7 @@ function createUser() {
         } catch (error) {
             console.log(error)
             res.status(500).json({
-                status: 'A error - - 500: Unexpected error',
+                status: error,
             })
         }
     }
