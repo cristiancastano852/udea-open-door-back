@@ -10,10 +10,10 @@ userCoursesTrackRoutes.route('/userCoursesTrack').get(async (req, res) => {
     const userCoursesTrack = await prisma.courseTrack.findUnique({
         where: {
                 id: userData.userId
-        }
+        },
     })
     res.status(200).json({
-        c,
+        userCoursesTrack,
         status: 'OK'
     })
 });

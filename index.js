@@ -9,6 +9,7 @@ import { userRoutes } from './routes/userRole.js';
 import { courseStatus } from './routes/courseStatus.js';
 import { userTrack } from './routes/userTrack.js';
 import { courseContentCreate } from './routes/courseContent.js';
+import { userCreate } from './routes/userCreate.js';
 import swaggerUi from 'swagger-ui-express';
 import swaggerjsdoc from 'swagger-jsdoc';
 
@@ -34,6 +35,7 @@ app.use(userRoutes);
 app.use(courseStatus);
 app.use(userTrack);
 app.use(courseContentCreate);
+app.use(userCreate);
 
 const swaggerSpec = {
   definition: {

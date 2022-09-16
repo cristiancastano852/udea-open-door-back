@@ -73,6 +73,7 @@ function status() {
                     finishDate: true,
                     Course: {
                         select: {
+                            id: true,
                             title: true,
                             description: true,
                         },
