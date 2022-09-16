@@ -68,7 +68,7 @@ function createUser() {
         } catch (error) {
             console.log(error)
              res.status(500).json({
-                status: 'A error - - 500: Unexpected erro',
+                status: 'A error - - 500: Unexpected err',
             })
         }
     }
