@@ -55,12 +55,12 @@ function createUser() {
             const user = await prisma.User.create({
                 data: {
                     email: userEmail,
-                    name: '',
-                    about: '',
+                    name: "",
+                    about: "",
                     age: 0,
-                    expectations: '',
-                    linkedin: '',
-                    avatar: ''
+                    expectations: "",
+                    linkedin: "",
+                    avatar: ""
 
                 },
             });
@@ -71,7 +71,7 @@ function createUser() {
         } catch (error) {
             console.log(error)
              res.status(500).json({
-                status: 'A error - - 500: Unexpected ',
+                status: 'A error - - 500: Unexpected error',
             })
         }
     }
