@@ -55,12 +55,7 @@ function createUser() {
             const user = await prisma.User.create({
                 data: {
                     email: userEmail,
-                    name: '',
-                    about: '',
-                    age: 0,
-                    expectations: '',
-                    linkedin: '',
-                    avatar: ''
+
                 },
             });
             const userId = user.id;
