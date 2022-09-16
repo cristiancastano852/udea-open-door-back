@@ -56,7 +56,8 @@ function createUser() {
                 data: {
                     email: userEmail,
                     name: '',
-                    about: ''
+                    about: '',
+                    age: 0
 
                 },
             });
