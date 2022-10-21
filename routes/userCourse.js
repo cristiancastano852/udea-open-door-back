@@ -52,17 +52,39 @@ const prisma = new PrismaClient();
  *              
  *          500:
  *              description: There was an unexpected error reaching connecting to the database
+ * 
+ *  /course/detail/courseId/remove:
+ *   delete:
+ *      parameters:
+ *          - in: params            
+ *            name: courseId
+ *            schema:
+ *              type: string
+ *            description: The id of the course to get
+ *      summary: Remove a specific user course that is not finished
+ *      tags: [User Course]
+ *      responses:
+ *          200:
+ *              description: It was possible to connect to the database and remove the user course           
+ *          
+ *          204:
+ *              description: The user course with that Id has a status that cant be removed, doesn't need to navigate away from its current page
+ *              
+ *          500:
+ *              description: There was an unexpected error reaching connecting to the database
  *          
  */
 
 cursoRoutes.route('/course/detail/:courseId').get(course());
+
+cursoRoutes.route('/course/detail/:courseId/remove').delete(deleteCourse());
 
 function course() {
     return async (req, res) => {
         try {
             const courseId = req.params.courseId;
             const userId = req.headers.userid;
-            console.log(userId)
+
             let course = await prisma.userCourse.findMany({
                 where: {
                     courseId: courseId,
@@ -134,6 +156,48 @@ function course() {
             res.status(500).json({
                 status: 'A error - - 500: Unexpected error',
             })
+        }
+    }
+}
+
+function deleteCourse() {
+    return async (req, res) => {
+        try {
+            const courseId = req.params.courseId;
+            const userId = req.headers.userid;
+
+            let course = await prisma.userCourse.findMany({
+                where: {
+                    courseId: courseId,
+                    userId: userId,
+                },
+                select: {
+                    status: true,
+                },
+            });
+
+            if (course[0].status != "Finished") {
+                try {
+                    await prisma.userCourse.deleteMany({
+                        where: {
+                            courseId: courseId,
+                            userId: userId,
+                            OR: [
+                                { status: "AbleToStart" },
+                                { status: "InProgress" },
+                            ]
+                        },
+                    });
+                    res.status(200).send({ status: 'Successfully removed' });
+                } catch {
+                    res.status(500).send({ status: 'Unexpected error' });
+                }
+
+            } else {
+                res.status(204).send({ status: 'Cant be removed' });
+            }
+        } catch {
+            res.status(500).send({ status: 'Unexpected error' });
         }
     }
 }

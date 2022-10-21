@@ -2,7 +2,6 @@ import express from 'express';
 import cors from 'cors';
 import { cursosRoutes } from './routes/courses.js';
 import { cursoRoutes } from './routes/userCourse.js';
-import { userCoursesTrackRoutes } from './routes/userCoursesTrack.js';
 import { courseCreate } from './routes/courseCreate.js';
 import { userProfileRoutes } from './routes/userProfile.js';
 import { userRoutes } from './routes/userRole.js';
@@ -27,7 +26,6 @@ app.get('/', (req, res) => {
 })
 
 app.use(cursosRoutes);
-app.use(userCoursesTrackRoutes);
 app.use(cursoRoutes);
 app.use(courseCreate);
 app.use(userProfileRoutes);

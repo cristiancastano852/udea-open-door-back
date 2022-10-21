@@ -61,7 +61,6 @@ function createUser() {
                     expectations: "",
                     linkedin: "",
                     avatar: ""
-
                 },
             });
             const userId = user.id;

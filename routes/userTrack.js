@@ -21,6 +21,11 @@ const prisma = new PrismaClient();
  *            schema:
  *              type: string
  *            description: The id of the user to track
+ *          - in: query
+ *            name: filter
+ *            schema:
+ *              type: string
+ *            description: The filter to the courses, can be AbleToStart, InProgress or Finished
  *      summary: Get the user's courses to track them
  *      tags: [User Course Status]
  *      responses:
@@ -65,10 +70,15 @@ function status() {
             let userCourses = await prisma.userCourse.findMany({
                 where: {
                     userId: userId,
+                    OR: [
+                        { status: (req.query.filter != null ? req.query.filter : "AbleToStart") },
+                        { status: (req.query.filter != null ? req.query.filter : "InProgress") },
+                        { status: (req.query.filter != null ? req.query.filter : "Finished") },
+                    ],
                 },
 
                 select: {
-                    status:true,
+                    status: true,
                     inscriptionDate: true,
                     finishDate: true,
                     Course: {
