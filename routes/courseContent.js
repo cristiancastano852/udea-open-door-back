@@ -13,7 +13,7 @@ const prisma = new PrismaClient();
 /**
  * @swagger
  * paths:
- *  /createContent/courseId:
+ *  /createContent/:courseId:
  *   post:
  *      summary: As an administrator you can create a course
  *      parameters:

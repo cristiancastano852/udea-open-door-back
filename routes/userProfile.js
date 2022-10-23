@@ -16,7 +16,7 @@ const prisma = new PrismaClient();
  *  /userProfile/:userId:
  *   get:
  *      parameters:
- *          - in: body
+ *          - in: params
  *            name: userId
  *            schema:
  *             type: object
@@ -65,7 +65,7 @@ const prisma = new PrismaClient();
  * /userProfile/:userId/edit:
  *   put:
  *      parameters:
- *          - in: body
+ *          - in: params
  *            name: userId
  *            schema:
  *             type: object
@@ -74,32 +74,32 @@ const prisma = new PrismaClient();
  *               type: string
  *               example: cl7thojl40138mkmkczusfmml
  *            description: The id of the user 
- *          - in: query
+ *          - in: body
  *            name: name
  *            schema:
  *              type: string
  *            description: The name of the user
- *          - in: query
+ *          - in: body
  *            name: about
  *            schema:
  *              type: string
  *            description: A short description about the user
- *          - in: query
+ *          - in: body
  *            name: age
  *            schema:
  *              type: int
  *            description: The age of the user
- *          - in: query
+ *          - in: body
  *            name: avatar
  *            schema:
  *              type: string
  *            description: The link to the avatar of the user
- *          - in: query
+ *          - in: body
  *            name: expectations
  *            schema:
  *              type: string
  *            description: The expectations of the user
- *          - in: query
+ *          - in: body
  *            name: linkedin
  *            schema:
  *              type: string
@@ -187,7 +187,9 @@ function editUserProfile() {
     return async (req, res) => {
         try {
             const userId = req.params.userId;
-            const { name, avatar, about, expectations, linkedin, age } = req.query;
+            const { name, avatar, about, expectations, linkedin, age } = req.body;
+
+            console.log(req.body)
 
             let userUpdate = await prisma.user.update({
 
