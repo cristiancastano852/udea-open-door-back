@@ -79,9 +79,6 @@ const prisma = new PrismaClient();
  *                      schema:
  *                         type: object
  *                         properties:
- *                            userEmai:
- *                              type: string
- *                              example: userEmail@email.com
  *                            name:
  *                             type: string
  *                             example: Nombre de usuario
