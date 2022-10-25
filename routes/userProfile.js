@@ -19,7 +19,6 @@ const prisma = new PrismaClient();
  *          - in: params
  *            name: userId
  *            schema:
- *             type: object
  *             properties:
  *              userId:
  *               type: string
@@ -68,42 +67,39 @@ const prisma = new PrismaClient();
  *          - in: params
  *            name: userId
  *            schema:
- *             type: object
  *             properties:
  *              userId:
  *               type: string
  *               example: cl7thojl40138mkmkczusfmml
  *            description: The id of the user 
- *          - in: body
- *            name: name
- *            schema:
- *              type: string
- *            description: The name of the user
- *          - in: body
- *            name: about
- *            schema:
- *              type: string
- *            description: A short description about the user
- *          - in: body
- *            name: age
- *            schema:
- *              type: int
- *            description: The age of the user
- *          - in: body
- *            name: avatar
- *            schema:
- *              type: string
- *            description: The link to the avatar of the user
- *          - in: body
- *            name: expectations
- *            schema:
- *              type: string
- *            description: The expectations of the user
- *          - in: body
- *            name: linkedin
- *            schema:
- *              type: string
- *            description: The link to the linkedin of the user
+ *      requestBody:
+ *              required: true
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                         type: object
+ *                         properties:
+ *                            userEmai:
+ *                              type: string
+ *                              example: userEmail@email.com
+ *                            name:
+ *                             type: string
+ *                             example: Nombre de usuario
+ *                            about:
+ *                             type: string
+ *                             example: Short description about the user
+ *                            age:
+ *                             type: number
+ *                             example: 25
+ *                            avatar:
+ *                             type: url
+ *                             example: https://ih1.redbubble.net/image.3370023197.9328/st,small,507x507-pad,600x600,f8f8f8.jpg
+ *                            expectations:
+ *                             type: string
+ *                             example: The expectations of the user
+ *                            linkedin:
+ *                             type: url
+ *                             example: https://www.linkedin.com/in/
  *      summary: Edit the profile information for a user
  *      tags: [User Profile]
  *      responses:
