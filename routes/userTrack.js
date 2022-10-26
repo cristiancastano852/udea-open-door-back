@@ -65,8 +65,8 @@ function status() {
     return async (req, res) => {
 
         try {
-            const userId = req.params.courseId;
-
+            const userId = req.params.userId;
+            console.log(userId);
             let userCourses = await prisma.userCourse.findMany({
                 where: {
                     userId: userId,
